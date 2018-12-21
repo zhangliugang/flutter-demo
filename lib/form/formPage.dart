@@ -8,6 +8,20 @@ class FormPage extends StatefulWidget {
 class _FormPageState extends State<FormPage> {
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  FocusNode _focusNode;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _focusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +48,6 @@ class _FormPageState extends State<FormPage> {
                     fontSize: 20,
                     color: Colors.grey
                   ),
-                  counterText: '111',
                   prefixText: '+86 ',
                   hasFloatingPlaceholder: true
                 ),
@@ -43,6 +56,7 @@ class _FormPageState extends State<FormPage> {
                     return 'Please enter some text';
                   }
                 },
+                focusNode: _focusNode,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -62,7 +76,12 @@ class _FormPageState extends State<FormPage> {
           ),
 
         )
-      )
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => FocusScope.of(context).requestFocus(_focusNode),
+        tooltip: '',
+        child: Icon(Icons.edit),
+      ),
 
     );
   }
