@@ -10,17 +10,30 @@ class _FormPageState extends State<FormPage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   FocusNode _focusNode;
 
+  final controller = TextEditingController();
+  final controller2 = TextEditingController();
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _focusNode = FocusNode();
+    controller.addListener(_printLatestValue);
+    controller2.addListener(() {
+      print("${controller2.text}");
+    });
   }
 
   @override
   void dispose() {
     _focusNode.dispose();
+    controller.dispose();
+    controller2.dispose();
     super.dispose();
+  }
+
+  _printLatestValue() {
+    controller2.text = controller.text;
   }
 
   @override
@@ -38,6 +51,7 @@ class _FormPageState extends State<FormPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               TextFormField(
+                controller: controller,
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.black,
@@ -57,6 +71,9 @@ class _FormPageState extends State<FormPage> {
                   }
                 },
                 focusNode: _focusNode,
+              ),
+              TextFormField(
+controller: controller2,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),

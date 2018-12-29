@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter1/anim/Anim.dart';
 import 'package:flutter1/drawer/drawer.dart';
 import 'package:flutter1/form/formPage.dart';
+import 'package:flutter1/Images/img.dart';
 
 void main() => runApp(MyApp());
 
@@ -77,6 +78,12 @@ class MainPage extends StatelessWidget {
           title: Text('Form'),
           onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (_) => FormPage()));
+          },
+        ),
+        ListTile(
+          title: Text('Images'),
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) => ImagePage()));
           },
         )
       ],
